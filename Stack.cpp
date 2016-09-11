@@ -15,10 +15,6 @@ public:
 
     ~Stack();
 
-   // Stack(const Stack &) = delete;
-
-    //Stack operator =(const Stack &) = delete;
-
     size_t count() const;
 
     void push(T const &);
@@ -38,7 +34,7 @@ private:
 template<typename T>
 Stack<T>::Stack()
         : array_size_(0),
-          count_(0) { }
+             count_(0) { }
 
 template<typename T>
 Stack<T>::~Stack() {
@@ -93,10 +89,10 @@ bool Stack<T>::is_empty() const {
 int main() {
     Stack<int> stack;
 try {
-    cout « stack.pop();
+    cout Â« stack.pop();
 }
 catch(...){
-    cout « "error";
+    cout Â« "error";
 }
 return 0;
 }
