@@ -1,3 +1,7 @@
+#ifndef stack_cpp
+#define stack_cpp
+#pragma once
+
 #include <iostream>
 #include <cstdlib>
 #include <string>
@@ -15,6 +19,11 @@ public:
 
     ~Stack();
 
+    Stack(const Stack &);
+
+    Stack& operator =(
+            const Stack &);
+
     size_t count() const;
 
     void push(T const &);
@@ -24,6 +33,7 @@ public:
     bool is_empty() const;
 
 private:
+    void new_with_empty(const T*);
     void grow();
 
     T *array_;
@@ -34,7 +44,7 @@ private:
 template<typename T>
 Stack<T>::Stack()
         : array_size_(0),
-             count_(0) { }
+          count_(0) { }
 
 template<typename T>
 Stack<T>::~Stack() {
@@ -42,7 +52,6 @@ Stack<T>::~Stack() {
         delete[] array_;
     }
 }
-
 
 template<typename T>
 size_t Stack<T>::count() const {
@@ -73,26 +82,38 @@ void Stack<T>::grow() {
 }
 
 template<typename T>
-T Stack<T>::pop(){
+T Stack<T>::pop() {
     if (is_empty()) {
         throw std::logic_error("Stack is empty!");
     }
     return array_[--count_];
 }
 
-
 template<typename T>
 bool Stack<T>::is_empty() const {
     return count_ == 0;
 }
 
-int main() {
-    Stack<int> stack;
-try {
-    cout « stack.pop();
+template <typename T>
+void Stack<T>::new_with_empty(const T *tmp) {
+    array_ = new T[array_size_];
+    copy(tmp, tmp + count_, array_);
 }
-catch(...){
-    cout « "error";
+
+template <typename T>
+Stack<T>::Stack(const Stack &tmp)
+        :   count_(tmp.count_),
+            array_size_(tmp.array_size_)
+{
+    new_with_empty(tmp.array_);
 }
-return 0;
+
+template <typename T>
+Stack<T>& Stack<T>::operator=(const Stack<T> &tmp) {
+    count_ = tmp.count_;
+    array_size_ = tmp.array_size_;
+    new_with_empty(tmp.array_);
+    return *this;
 }
+
+#endif
