@@ -25,7 +25,6 @@ public:
 
     size_t count() const noexcept;
 
-
     void push(T const &);
 
     T pop();
