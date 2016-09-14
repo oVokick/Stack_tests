@@ -21,10 +21,10 @@ public:
 
     Stack(const Stack &);
 
-    Stack& operator =(
-            const Stack &);
+    Stack& operator =(const Stack &);
 
-    size_t count() const;
+    size_t count() const noexcept;
+
 
     void push(T const &);
 
@@ -54,7 +54,7 @@ Stack<T>::~Stack() {
 }
 
 template<typename T>
-size_t Stack<T>::count() const {
+size_t Stack<T>::count() const noexcept {
     return count_;
 }
 
@@ -63,7 +63,8 @@ void Stack<T>::push(T const &element) {
     if (array_size_ <= count_) {
         grow();
     }
-    array_[count_++] = element;
+   array_[count_] = element;
+   count_++;
 }
 
 template<typename T>
@@ -86,7 +87,8 @@ T Stack<T>::pop() {
     if (is_empty()) {
         throw std::logic_error("Stack is empty!");
     }
-    return array_[--count_];
+    --count_;
+    return array_[count_];
 }
 
 template<typename T>
