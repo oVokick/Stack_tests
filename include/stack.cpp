@@ -1,11 +1,12 @@
+#ifndef stack_cpp
 #define stack_cpp
 #pragma once
-
 
 #include <iostream>
 #include <cstdlib>
 #include <string>
-using namespace std
+
+using namespace std;
 
 size_t max(size_t a, size_t b) {
     return a > b ? a : b;
