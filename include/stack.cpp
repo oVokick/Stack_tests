@@ -15,21 +15,21 @@ public:
 
     ~Stack();
 
-    Stack(const Stack &);
+    Stack(const Stack &); /* strong */
 
-    Stack& operator = (const Stack &);
+    Stack& operator = (const Stack &); /* strong */
 
-    size_t count() const;
+    size_t count() const; /* noexcept */
 
-    void push(T const &);
+    void push(T const &); /* strong */
 
-    T pop();
+    T pop();        /* basic */
 
-    bool is_empty() const;
+    bool is_empty() const; /* noexcept */
 
 private:
-    void new_with_empty(const T*);
-    void grow();
+    void new_with_empty(const T*); /* strong */
+    void grow(); /* strong */
 
     T *array_;
     size_t array_size_;
