@@ -1,7 +1,3 @@
-#ifndef stack_cpp
-#define stack_cpp
-#pragma once
-
 #include <iostream>
 #include <cstdlib>
 #include <string>
@@ -12,7 +8,6 @@ size_t max(size_t a, size_t b) {
     return a > b ? a : b;
 }
 
-
 template<typename T>
 class Stack {
 public:
@@ -22,9 +17,9 @@ public:
 
     Stack(const Stack &);
 
-    Stack& operator =(const Stack &);
+    Stack& operator = (const Stack &);
 
-    size_t count() const noexcept;
+    size_t count() const;
 
     void push(T const &);
 
@@ -54,7 +49,7 @@ Stack<T>::~Stack() {
 }
 
 template<typename T>
-size_t Stack<T>::count() const noexcept {
+size_t Stack<T>::count() const {
     return count_;
 }
 
@@ -63,17 +58,14 @@ void Stack<T>::push(T const &element) {
     if (array_size_ <= count_) {
         grow();
     }
-   array_[count_] = element;
-   count_++;
+    array_[count_++] = element;
 }
 
 template<typename T>
 void Stack<T>::grow() {
     size_t new_array_size_ = max(1, array_size_ * 2);
     T *new_array_ = new T[new_array_size_];
-    for (int i = 0; i < count_; i++) {
-        new_array_[i] = array_[i];
-    }
+    copy(array_, array_ + count_, new_array_);
     if (!is_empty()) {
         delete[] array_;
     }
@@ -87,8 +79,7 @@ T Stack<T>::pop() {
     if (is_empty()) {
         throw std::logic_error("Stack is empty!");
     }
-    --count_;
-    return array_[count_];
+    return array_[--count_];
 }
 
 template<typename T>
@@ -117,5 +108,3 @@ Stack<T>& Stack<T>::operator=(const Stack<T> &tmp) {
     new_with_empty(tmp.array_);
     return *this;
 }
-
-#endif
