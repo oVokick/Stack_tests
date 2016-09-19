@@ -9,9 +9,10 @@ size_t max(size_t a, size_t b) {
 }
 
 template <typename T>
-void new_with_copy(const T *tmp) {
-    array_ = new T[array_size_];
-    copy(tmp, tmp + count_, array_);
+T* new_with_copy(const T *tmp, count, array_size) {
+    array_ = new T[array_size];
+    copy(tmp, tmp + count, array_);\
+    return array_;
 }
 
 template<typename T>
