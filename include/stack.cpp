@@ -108,6 +108,7 @@ Stack<T>& Stack<T>::operator=(const Stack<T> &tmp) {
     if (this == &tmp) {}
     count_ = tmp.count_;
     array_size_ = tmp.array_size_;
+    delete[] array_;
     array_ = new_with_copy(tmp.array_, count_, array_size_);
     return *this;
 }
