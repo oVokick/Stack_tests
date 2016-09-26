@@ -8,8 +8,8 @@ size_t max(size_t a, size_t b) {
     return a > b ? a : b;
 }
 
-template <typename T>
-T* new_with_copy(const T *tmp, size_t count, size_t array_size) {
+template<typename T>
+T *new_with_copy(const T *tmp, size_t count, size_t array_size) {
 T *array_ = new T[array_size];
 copy(tmp, tmp + count, array_);
     return array_;
@@ -95,7 +95,7 @@ bool Stack<T>::is_empty() const {
 
 
 
-template <typename T>
+template<typename T>
 Stack<T>::Stack(const Stack &tmp)
         :   count_(tmp.count_),
             array_size_(tmp.array_size_)
@@ -103,12 +103,14 @@ Stack<T>::Stack(const Stack &tmp)
     array_ = new_with_copy(tmp.array_, count_, array_size_);
 }
 
-template <typename T>
+template<typename T>
 Stack<T>& Stack<T>::operator=(const Stack<T> &tmp) {
-    if (this == &tmp) {}
-    count_ = tmp.count_;
-    array_size_ = tmp.array_size_;
-    delete[] array_;
-    array_ = new_with_copy(tmp.array_, count_, array_size_);
-    return *this;
+	if (this == &tmp) {}
+	else {
+		count_ = tmp.count_;
+		array_size_ = tmp.array_size_;
+		delete[] array_;
+		array_ = new_with_copy(tmp.array_, count_, array_size_);
+	}
+		return *this;
 }
