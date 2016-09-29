@@ -10,8 +10,8 @@ size_t max(size_t a, size_t b) {
 
 template<typename T>
 T *new_with_copy(const T *tmp, size_t count, size_t array_size) {
-T *array_ = new T[array_size];
-copy(tmp, tmp + count, array_);
+    T *array_ = new T[array_size];
+    copy(tmp, tmp + count, array_);
     return array_;
 }
 
