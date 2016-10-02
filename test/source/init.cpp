@@ -16,7 +16,7 @@ SCENARIO("push", "[push]"){
   REQUIRE(s.pop() == 1);
 }
 
-SCENARIO("pop", "[pop]"){
+SCENARIO("top", "[top]"){
   Stack<int> s;
   s.push(1);
   REQUIRE(s.count() == 1);
