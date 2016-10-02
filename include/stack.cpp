@@ -1,6 +1,10 @@
+#ifndef stack_cpp
+#define stack_cpp
+#pragma oncea
 #include <iostream>
 #include <cstdlib>
 #include <string>
+#include <stdexcept>
 
 using namespace std;
 
@@ -8,8 +12,8 @@ size_t max(size_t a, size_t b) {
     return a > b ? a : b;
 }
 
-template<typename T>
-T *new_with_copy(const T *tmp, size_t count, size_t array_size) { /* strong */
+template <typename T>
+T* new_with_copy(const T *tmp, size_t count, size_t array_size) {  /*strong*/
     T *array_ = new T[array_size];
     copy(tmp, tmp + count, array_);
     return array_;
@@ -30,7 +34,9 @@ public:
 
     void push(T const &); /*strong*/
 
-    T pop();        /*basic*/
+    void pop();  /*strong*/
+    
+    T top() const; /*noexcept*/
 
     bool is_empty() const; /*noexcept*/
 
@@ -61,7 +67,7 @@ size_t Stack<T>::count() const {
 
 template<typename T>
 void Stack<T>::push(T const &element) {
-    if (array_size_ <= count_) {
+    if (array_size_ == count_) {
         grow();
     }
     array_[count_++] = element;
@@ -80,11 +86,19 @@ void Stack<T>::grow() {
 }
 
 template<typename T>
-T Stack<T>::pop() {
+void Stack<T>::pop() {
     if (is_empty()) {
         throw std::logic_error("Stack is empty!");
     }
-    return array_[--count_];
+    --count;
+}
+
+template <typename T>
+T Stack<T>::top() const {
+    if (is_empty()) {
+        throw std::logic_error("Stack is empty!");
+    }
+    return array_[count_ - 1];
 }
 
 template<typename T>
@@ -92,9 +106,7 @@ bool Stack<T>::is_empty() const {
     return count_ == 0;
 }
 
-
-
-template<typename T>
+template <typename T>
 Stack<T>::Stack(const Stack &tmp)
         :   count_(tmp.count_),
             array_size_(tmp.array_size_)
@@ -102,14 +114,18 @@ Stack<T>::Stack(const Stack &tmp)
     array_ = new_with_copy(tmp.array_, count_, array_size_);
 }
 
-template<typename T>
+template <typename T>
 Stack<T>& Stack<T>::operator=(const Stack<T> &tmp) {
-	if (this == &tmp) {}
-	else {
-		count_ = tmp.count_;
-		array_size_ = tmp.array_size_;
-		delete[] array_;
-		array_ = new_with_copy(tmp.array_, count_, array_size_);
-	}
-		return *this;
+    if (this == &tmp) {
+    }   else {
+        count_ = tmp.count_;
+        array_size_ = tmp.array_size_;
+        delete[] array_;
+        array_ = new_with_copy(tmp.array_, count_, array_size_);
+    
+    }
+    return *this;
 }
+
+
+#endif
