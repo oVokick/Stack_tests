@@ -70,8 +70,7 @@ void Stack<T>::push(T const &element) {
 template<typename T>
 void Stack<T>::grow() {
     size_t new_array_size_ = max(1, array_size_ * 2);
-    T *new_array_ = new T[new_array_size_];
-    copy(array_, array_ + count_, new_array_);
+    T *new_array_ = new_with_copy(array_, count_, new_array_size_);
     if (!is_empty()) {
         delete[] array_;
     }
