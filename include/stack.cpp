@@ -102,8 +102,9 @@ Stack<T>::Stack(const Stack &tmp)
 template <typename T>
 Stack<T>& Stack<T>::operator=(const Stack<T> &tmp) {
     if (this != &tmp) {
-        delete[] array_;
+        T * n = array_;
         array_ = new_with_copy(tmp.array_, count_, array_size_);
+        delete [] = n;
         count_ = tmp.count_;
         array_size_ = tmp.array_size_;
     }
