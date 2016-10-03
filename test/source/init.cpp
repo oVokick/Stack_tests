@@ -13,14 +13,14 @@ SCENARIO("push", "[push]"){
   Stack<int> s;
   s.push(1);
   REQUIRE(s.count() == 1);
-  REQUIRE(s.top() == 1);
+  REQUIRE(s.pop() == 1);
 }
 
 SCENARIO("top", "[top]"){
   Stack<int> s;
   s.push(1);
   REQUIRE(s.count() == 1);
-  REQUIRE(s.top() == 1);
+  REQUIRE(s.pop() == 1);
 }
 
 SCENARIO("prisv", "[prisv]"){
@@ -29,7 +29,7 @@ SCENARIO("prisv", "[prisv]"){
   Stack<int> s2;
   s2 = s;
   REQUIRE(s.count() == s2.count());
-  REQUIRE(s.top() == s2.top());
+  REQUIRE(s.pop() == s2.pop());
 }
 
 SCENARIO("copy", "[copy]"){
