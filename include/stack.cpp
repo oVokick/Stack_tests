@@ -1,6 +1,6 @@
 #ifndef stack_cpp
 #define stack_cpp
-#pragma oncea
+#pragma once
 #include <iostream>
 #include <cstdlib>
 #include <string>
@@ -34,7 +34,9 @@ public:
 
     void push(T const &); /* strong */
 
-    T& pop();  /* strong */
+    void pop();  /* strong */
+
+    T& top() const; /* strong */
 
 private:
     void grow(); /* strong */
@@ -51,7 +53,7 @@ Stack<T>::Stack()
 
 template<typename T>
 Stack<T>::~Stack() {
-    if (count_ != 0) {
+    if (count_ == 0) {
         delete[] array_;
     }
 }
@@ -83,12 +85,19 @@ void Stack<T>::grow() {
 }
 
 template<typename T>
-T& Stack<T>::pop() {
+void Stack<T>::pop() {
     if (count_ == 0) {
         throw std::logic_error("Stack is empty!");
     }
     --count_;
-    return array_[count_];
+}
+
+template <typename T>
+T& Stack<T>::top() const {
+    if (count_ == 0) {
+        throw std::logic_error("Stack is empty!");
+    }
+    return array_[count_ - 1];
 }
 
 template <typename T>
