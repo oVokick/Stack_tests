@@ -36,9 +36,6 @@ public:
 
     void pop();  /*strong*/
 
-    T top() const; /*strong*/
-
-    bool empty() const; /*noexcept*/
 
 private:
     void grow(); /*strong*/
@@ -92,14 +89,6 @@ void Stack<T>::pop() {
         throw std::logic_error("Stack is empty!");
     }
     --count_;
-}
-
-template <typename T>
-T Stack<T>::top() const {
-    if (empty()) {
-        throw std::logic_error("Stack is empty!");
-    }
-    return array_[count_ - 1];
 }
 
 template <typename T>
