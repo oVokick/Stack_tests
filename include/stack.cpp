@@ -38,6 +38,7 @@ public:
 
     T top() const; /*strong*/
 
+    bool empty() const; /*noexcept*/
 
 private:
     void grow(); /*strong*/
@@ -122,5 +123,9 @@ Stack<T>& Stack<T>::operator=(const Stack<T> &tmp) {
 }
 
 
+template <typename T>
+bool Stack<T>::empty() const {
+    return count_ == 0;
+}
 
 #endif
