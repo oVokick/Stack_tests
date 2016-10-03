@@ -6,7 +6,7 @@ using namespace std;
 SCENARIO("count", "[count]"){
   Stack<int> s;
   s.push(1);
-  REQUIRE(s.count() == 1);
+  REQUIRE(s.count()==1);
 }
 
 SCENARIO("push", "[push]"){
@@ -16,7 +16,7 @@ SCENARIO("push", "[push]"){
   REQUIRE(s.pop() == 1);
 }
 
-SCENARIO("top", "[top]"){
+SCENARIO("pop", "[pop]"){
   Stack<int> s;
   s.push(1);
   REQUIRE(s.count() == 1);
@@ -27,15 +27,16 @@ SCENARIO("prisv", "[prisv]"){
   Stack<int> s;
   s.push(1);
   Stack<int> s2;
-  s2 = s;
+  s2=s;
   REQUIRE(s.count() == s2.count());
   REQUIRE(s.pop() == s2.pop());
 }
 
 SCENARIO("copy", "[copy]"){
-    Stack<int> s;
-    s.push(3);
-    Stack<int> s2(s);
-    REQUIRE(s2.count() == 1);
-    REQUIRE(s2.top() == 3);
+  Stack<int> s;
+  s.push(3);
+  Stack<int> s2(s);
+  REQUIRE(s2.count() == 1);
+  REQUIRE(s2.pop() == 3);
 }
+
