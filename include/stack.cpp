@@ -36,7 +36,7 @@ public:
 
     void pop();  /*strong*/
 
-    T top() const; /*basic*/
+    T top() const; /*strong*/
 
     bool empty() const; /*noexcept*/
 
