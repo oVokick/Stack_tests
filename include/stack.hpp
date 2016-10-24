@@ -171,7 +171,7 @@ auto Stack<T>::operator=(const Stack<T> &tmp) ->Stack & {
 }
 
 template<typename T>
-auto Stack<T>::top() -> T {
+auto Stack<T>::top() ->const T& {
     if (empty()) {
         throw std::logic_error("Stack is empty!");
     }
