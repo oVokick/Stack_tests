@@ -44,7 +44,7 @@ class Allocator {
 protected:
     Allocator(size_t size = 0);
 
-    ~Allocator();
+    virtual ~Allocator();
 
     auto swap(Allocator &other) -> void;
 
