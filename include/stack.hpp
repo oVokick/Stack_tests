@@ -94,7 +94,7 @@ public:
 
     auto pop() -> void;     /* strong */
 
-    auto top() -> T;    /* strong */
+    auto top() -> const T;    /* strong */
 
 
 
@@ -182,7 +182,5 @@ template<typename T>
 auto Stack<T>::empty() const ->bool {
     return this->count_ == 0;
 }
-
-
 
 #endif
