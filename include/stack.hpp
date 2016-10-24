@@ -94,7 +94,7 @@ public:
 
     auto pop() -> void;     /* strong */
 
-    auto top() -> const T;    /* strong */
+    auto top() -> const T&;    /* strong */
 
 
 
