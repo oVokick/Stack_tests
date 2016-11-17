@@ -209,8 +209,10 @@ auto Allocator<T>::empty() const -> bool {
 template<typename T>
 auto Allocator<T>::destroy(T *first, T *last) -> void {
 	for (; first != last; ++first) {
-		destroy(&*first);
-	}
+		if (test(first - ptr)){
+			destroy(&*first);
+		}
+        }
 }
 
 
