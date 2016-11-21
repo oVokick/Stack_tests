@@ -143,7 +143,7 @@ Allocator<T>::~Allocator() {
 	if (map_->counter() > 0) {
 		destroy(ptr_, ptr_ + size_);
 	}
-	operator delete(ptr_);
+        delete ptr_;
 }
 
 template<typename T>
