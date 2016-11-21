@@ -143,7 +143,7 @@ Allocator<T>::~Allocator() {
 	if (map_->counter() > 0) {
 		destroy(ptr_, ptr_ + size_);
 	}
-        delete ptr_;
+        operator delete(ptr_);
 }
 
 template<typename T>
@@ -158,7 +158,7 @@ void Allocator<T>::construct(T *ptr, T const &value) {
 	if (ptr < ptr_ || ptr >= ptr_ + size_) {
 		std::out_of_range("Error");
 	}
-	new(ptr)T(value);
+	operator new(ptr)T(value);
 	map_->set(ptr - ptr_);
 }
 
