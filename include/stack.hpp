@@ -158,7 +158,7 @@ void Allocator<T>::construct(T *ptr, T const &value) {
 	if (ptr < ptr_ || ptr >= ptr_ + size_) {
 		std::out_of_range("Error");
 	}
-	operator new(ptr)T(value);
+	new(ptr)T(value);
 	map_->set(ptr - ptr_);
 }
 
