@@ -62,3 +62,39 @@ SCENARIO("empty3", "[empty3]"){
   
   REQUIRE(s1.empty()==false);
 }
+
+class Test
+{
+public:
+  static ssize_t  counter;
+  Test()
+  {
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
+    ++counter;
+  }
+  Test( Test const & )
+  {
+   std::cout << __PRETTY_FUNCTION__ << std::endl;
+    ++counter;
+  }
+  ~Test()
+  {
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
+    --counter;
+  }
+};
+
+ssize_t Test::counter = 0;
+
+SCENARIO("Allocator::~Allocator") {
+
+  {
+    Allocator<Test> allocator{ 4 };
+    allocator.construct( allocator.get() + 1, Test() );
+    allocator.construct( allocator.get() + 2, Test() );
+
+    REQUIRE( Test::counter == 2 );
+  }
+
+  REQUIRE( Test::counter == 0 );
+}
