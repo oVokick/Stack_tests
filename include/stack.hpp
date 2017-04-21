@@ -137,7 +137,9 @@ template<typename T>
 auto allocator<T>::destroy(T * first, T * last)->void{
 	if (first >= ptr_&&last <= ptr_ + this->count())
 	for (; first != last; ++first) {
-		destroy(&*first);
+		if (first - ptr_){
+			destroy(&*first);
+		}
 	}
 }
 
